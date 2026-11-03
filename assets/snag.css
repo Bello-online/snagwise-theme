@@ -314,6 +314,7 @@
 
 .snag-social__item { display: block; aspect-ratio: 1; background: rgba(var(--color-foreground), 0.08); overflow: hidden; }
 .snag-social__item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.snag-social__item img[alt=''] { object-fit: contain; padding: 10%; }
 .snag-social__item svg { width: 100%; height: 100%; display: block; }
 
 .snag-social__handles {

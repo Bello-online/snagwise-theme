@@ -120,6 +120,7 @@
       "settings": {
         "heading": "Drops land on the feed first",
         "text": "Unboxings, stock counts and the Thursday drop preview.",
+        "fallback_collection": "this-weeks-drop",
         "instagram_url": "",
         "instagram_label": "@snagwise on Instagram",
         "tiktok_url": "",
