@@ -1,0 +1,89 @@
+{%- comment -%}
+  SnagWise product page blocks, rendered from main-product.liquid's block loop.
+  Accepts: block, product
+{%- endcomment -%}
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+-%}
+{%- case block.type -%}
+  {%- when 'snag_deal' -%}
+    {%- liquid
+      assign saves = 0
+      if variant.compare_at_price > variant.price
+        assign saves = variant.compare_at_price | minus: variant.price
+      endif
+      assign qty = -1
+      if variant.inventory_management == 'shopify'
+        assign qty = variant.inventory_quantity
+      endif
+    -%}
+    <div class="snag-deal" {{ block.shopify_attributes }}>
+      {%- if saves > 0 -%}
+        <span class="snag-deal__save">You save {{ saves | money_without_trailing_zeros }}</span>
+      {%- endif -%}
+      {%- if block.settings.condition != blank -%}
+        <span class="snag-deal__line">{{ block.settings.condition }}</span>
+      {%- endif -%}
+      {%- if product.available == false -%}
+        <span class="snag-deal__stock">Snagged. Next drop is coming.</span>
+      {%- elsif qty > 0 and qty <= block.settings.low_threshold -%}
+        <span class="snag-deal__stock">Only {{ qty }} left · Limited quantity</span>
+      {%- elsif qty > 0 -%}
+        <span class="snag-deal__stock">{{ qty }} left · Limited quantity</span>
+      {%- endif -%}
+    </div>
+
+  {%- when 'snag_fulfilment' -%}
+    <div class="snag-fulfil" data-choice="pickup-1" {{ block.shopify_attributes }}>
+      {%- if block.settings.title != blank -%}
+        <p class="snag-fulfil__title">{{ block.settings.title | escape }}</p>
+      {%- endif -%}
+      <div class="snag-fulfil__options" role="radiogroup" aria-label="{{ block.settings.title | default: 'Pickup or delivery' | escape }}">
+        <label class="snag-fulfil__option">
+          <input type="radio" name="snag-fulfil-{{ block.id }}" value="pickup-1" checked>
+          <span>{{ block.settings.pickup_1_label | escape }}</span>
+        </label>
+        <label class="snag-fulfil__option">
+          <input type="radio" name="snag-fulfil-{{ block.id }}" value="pickup-2">
+          <span>{{ block.settings.pickup_2_label | escape }}</span>
+        </label>
+        <label class="snag-fulfil__option">
+          <input type="radio" name="snag-fulfil-{{ block.id }}" value="delivery">
+          <span>{{ block.settings.delivery_label | escape }}</span>
+        </label>
+      </div>
+      <div class="snag-fulfil__detail snag-fulfil__detail--1">{{ block.settings.pickup_1_text }}</div>
+      <div class="snag-fulfil__detail snag-fulfil__detail--2">{{ block.settings.pickup_2_text }}</div>
+      <div class="snag-fulfil__detail snag-fulfil__detail--3">{{ block.settings.delivery_text }}</div>
+      {%- if block.settings.shipping_note != blank -%}
+        <p class="snag-fulfil__ship">{{ block.settings.shipping_note | escape }}</p>
+      {%- endif -%}
+    </div>
+    <script>
+      (function () {
+        var box = document.currentScript.previousElementSibling;
+        if (!box) return;
+        box.addEventListener('change', function (e) {
+          if (e.target && e.target.type === 'radio') box.dataset.choice = e.target.value;
+        });
+      })();
+    </script>
+
+  {%- when 'snag_ask' -%}
+    {%- liquid
+      assign href = ''
+      assign message = block.settings.message | replace: '[title]', product.title
+      if block.settings.whatsapp != blank
+        assign number = block.settings.whatsapp | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')'
+        assign href = 'https://wa.me/' | append: number | append: '?text=' | append: message | url_encode
+      elsif block.settings.instagram != blank
+        assign href = 'https://ig.me/m/' | append: block.settings.instagram | remove: '@'
+      endif
+    -%}
+    {%- if href != blank -%}
+      <a href="{{ href }}" class="snag-ask" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
+        {{ block.settings.label | escape }}
+      </a>
+    {%- endif -%}
+{%- endcase -%}

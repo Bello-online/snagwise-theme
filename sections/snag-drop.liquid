@@ -1,0 +1,144 @@
+{{ 'snag.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #Drop-{{ section.id }} { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+{%- endstyle -%}
+
+{%- liquid
+  assign collection = section.settings.collection
+  assign limit = section.settings.products_to_show
+-%}
+
+<div id="Drop-{{ section.id }}" class="snag-drop color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    <div class="snag-head">
+      <h2 class="snag-head__heading">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="snag-head__text">{{ section.settings.text }}</p>
+      {%- elsif collection != blank -%}
+        <p class="snag-head__text">{{ collection.products_count }} {% if collection.products_count == 1 %}item{% else %}items{% endif %} in this drop. Brand new, factory sealed, gone when they're gone.</p>
+      {%- endif -%}
+      {%- if section.settings.show_view_all and collection != blank and collection.products_count > limit -%}
+        <a href="{{ collection.url }}" class="snag-head__link">See all {{ collection.products_count }}</a>
+      {%- endif -%}
+    </div>
+
+    {%- if collection != blank and collection.products_count > 0 -%}
+      <ul class="snag-grid snag-grid--{{ section.settings.columns_desktop }}">
+        {%- for product in collection.products limit: limit -%}
+          <li>
+            {% render 'card-snag', card_product: product, low_threshold: section.settings.low_threshold, new_days: section.settings.new_days %}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- elsif request.design_mode -%}
+      <p class="snag-head__text">Pick a collection in the section settings. This week's drop is the usual choice.</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SnagWise drop grid",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "This week's drop"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "info": "Leave empty to show the item count."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 16,
+      "step": 4,
+      "label": "Products to show",
+      "default": 8
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "options": [
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show a link to the collection when there are more items",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "low_threshold",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Show \"Only N left\" at or below",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "new_days",
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "unit": "d",
+      "label": "Mark items \"Just landed\" for",
+      "info": "Products tagged \"new\" are always marked.",
+      "default": 7
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-3"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "SnagWise drop grid"
+    }
+  ]
+}
+{% endschema %}

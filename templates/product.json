@@ -3,59 +3,33 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
+        "title": { "type": "title" },
+        "price": { "type": "price" },
+        "deal": { "type": "snag_deal", "settings": { "condition": "Brand new · Factory sealed", "low_threshold": 3 } },
+        "variant_picker": { "type": "variant_picker", "settings": { "picker_type": "button", "swatch_shape": "square" } },
+        "quantity_selector": { "type": "quantity_selector" },
+        "buy_buttons": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": true, "show_gift_card_recipient": false } },
+        "fulfilment": {
+          "type": "snag_fulfilment",
           "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
+            "title": "Pickup or delivery",
+            "pickup_1_label": "Hamilton",
+            "pickup_1_text": "<p><strong>Free.</strong> Ready within 24 hours. Pickup spot and times are confirmed by message after checkout.</p>",
+            "pickup_2_label": "Waterloo",
+            "pickup_2_text": "<p><strong>Free.</strong> Ready within 48 hours. Pickup spot and times are confirmed by message after checkout.</p>",
+            "delivery_label": "Delivery",
+            "delivery_text": "<p><strong>Flat $15</strong> across the GTHA and Waterloo Region, usually within 2 days. Choose Local delivery at checkout.</p>",
+            "shipping_note": "Small items ship across Canada. Rates show at checkout."
           }
         },
-        "title": {
-          "type": "title"
-        },
-        "price": {
-          "type": "price"
-        },
-        "variant_picker": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button",
-            "swatch_shape": "circle"
-          }
-        },
-        "quantity_selector": {
-          "type": "quantity_selector"
-        },
-        "buy_buttons": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
-          }
-        },
-        "description": {
-          "type": "description"
-        },
-        "share": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share"
-          }
-        }
+        "ask": { "type": "snag_ask", "settings": { "label": "Ask about this item", "whatsapp": "", "instagram": "snagwise", "message": "Hi SnagWise, is [title] still available?" } },
+        "description": { "type": "description" },
+        "share": { "type": "share", "settings": { "share_label": "Share" } }
       },
-      "block_order": [
-        "vendor",
-        "title",
-        "price",
-        "variant_picker",
-        "quantity_selector",
-        "buy_buttons",
-        "description",
-        "share"
-      ],
+      "block_order": ["title", "price", "deal", "variant_picker", "quantity_selector", "buy_buttons", "fulfilment", "ask", "description", "share"],
       "settings": {
         "enable_sticky_info": true,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
         "media_position": "left",
         "gallery_layout": "stacked",
         "media_size": "large",
@@ -69,35 +43,24 @@
         "padding_bottom": 12
       }
     },
-    "disclosures": {
-      "type": "disclosures",
-      "settings": {
-        "padding_top": 36,
-        "padding_bottom": 0
-      }
-    },
     "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "You may also like",
+        "heading": "More drops",
         "heading_size": "h2",
         "products_to_show": 4,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "image_ratio": "square",
         "image_shape": "default",
-        "show_secondary_image": true,
+        "show_secondary_image": false,
         "show_vendor": false,
         "show_rating": false,
         "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 28
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     }
   },
-  "order": [
-    "main",
-    "disclosures",
-    "related-products"
-  ]
+  "order": ["main", "related-products"]
 }

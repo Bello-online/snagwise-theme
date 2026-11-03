@@ -1,0 +1,413 @@
+/* SnagWise layer. Archivo only, square corners, no shadows, no gradients, no thin rules.
+   The accent (button colour of the scheme) is used for savings, the Almost gone band and the one action. */
+
+/* ---------- Product card ---------- */
+.snag-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+  background: rgb(var(--color-background));
+}
+
+.snag-card__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  background: #fff;
+  overflow: hidden;
+}
+
+.snag-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8%;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.snag-card:hover .snag-card__media img { transform: scale(1.04); }
+
+.snag-card--sold-out .snag-card__media img { opacity: 0.45; }
+
+.snag-card__flag {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0.6rem 1rem;
+  background: rgb(var(--color-button));
+  color: rgb(var(--color-button-text));
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.snag-card__flag--gone {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+.snag-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.2rem 0 0;
+}
+
+.snag-card__title {
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+
+.snag-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-top: 0.2rem;
+}
+
+.snag-card__was {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.snag-card__save {
+  align-self: flex-start;
+  margin-top: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background: rgb(var(--color-button));
+  color: rgb(var(--color-button-text));
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.snag-card__stock {
+  font-size: 1.3rem;
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+.snag-card__stock--low {
+  color: rgb(var(--color-foreground));
+  font-weight: 600;
+}
+
+/* Dawn's own card (collection grid, search) gets the same two lines */
+.snag-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+
+.snag-card-meta .snag-card__save { margin-top: 0; }
+
+/* ---------- Grid ---------- */
+.snag-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.4rem 1.6rem;
+}
+
+@media screen and (min-width: 750px) {
+  .snag-grid { gap: 3.2rem 2.4rem; }
+  .snag-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .snag-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* ---------- Section heads ---------- */
+.snag-head {
+  display: grid;
+  gap: 0.8rem;
+  margin-bottom: 2.4rem;
+}
+
+.snag-head__heading {
+  margin: 0;
+  font-size: calc(var(--font-heading-scale) * 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+
+.snag-head__text {
+  margin: 0;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  max-width: 56ch;
+}
+
+.snag-head__link {
+  justify-self: start;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 0.2rem solid rgb(var(--color-button));
+  padding-bottom: 0.2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .snag-head {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: 'heading link' 'text link';
+    align-items: end;
+    margin-bottom: 3.2rem;
+  }
+  .snag-head__heading { grid-area: heading; font-size: calc(var(--font-heading-scale) * 4rem); }
+  .snag-head__text { grid-area: text; }
+  .snag-head__link { grid-area: link; align-self: end; }
+}
+
+/* ---------- Almost gone band ---------- */
+.snag-gone__rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.snag-gone__row {
+  display: grid;
+  grid-template-columns: 7.2rem 1fr auto;
+  align-items: center;
+  gap: 1.6rem;
+  padding: 1.2rem 1.6rem 1.2rem 1.2rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.snag-gone__row:nth-child(odd) { background: rgba(var(--color-foreground), 0.08); }
+.snag-gone__row:hover { background: rgb(var(--color-foreground)); color: rgb(var(--color-background)); }
+
+.snag-gone__thumb {
+  width: 7.2rem;
+  height: 7.2rem;
+  background: #fff;
+}
+
+.snag-gone__thumb img { width: 100%; height: 100%; object-fit: contain; padding: 8%; display: block; }
+
+.snag-gone__name { font-size: 1.7rem; line-height: 1.25; }
+.snag-gone__note { display: block; font-size: 1.3rem; opacity: 0.75; margin-top: 0.2rem; }
+
+.snag-gone__deal {
+  text-align: right;
+  font-size: 1.5rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.snag-gone__deal small { display: block; font-weight: 400; font-size: 1.3rem; opacity: 0.75; }
+
+@media screen and (min-width: 990px) {
+  .snag-gone__row { grid-template-columns: 9rem 1fr auto; padding: 1.6rem 2.4rem 1.6rem 1.6rem; }
+  .snag-gone__thumb { width: 9rem; height: 9rem; }
+  .snag-gone__name { font-size: 2rem; }
+  .snag-gone__deal { font-size: 1.8rem; }
+}
+
+/* ---------- Category tiles ---------- */
+.snag-tiles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+@media screen and (min-width: 750px) { .snag-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.4rem; } }
+@media screen and (min-width: 990px) { .snag-tiles--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.snag-tile {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+}
+
+.snag-tile__media {
+  aspect-ratio: 4 / 3;
+  background: rgba(var(--color-foreground), 0.06);
+  overflow: hidden;
+}
+
+.snag-tile__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10%;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.snag-tile:hover .snag-tile__media img { transform: scale(1.05); }
+
+.snag-tile__bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.2rem 0 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.snag-tile__count { font-weight: 400; opacity: 0.7; font-size: 1.4rem; }
+
+/* ---------- How it works ---------- */
+.snag-how__tiles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.snag-how__tile {
+  flex: 1 1 0;
+  padding: 2.4rem;
+  background: rgba(var(--color-foreground), 0.06);
+  transition: flex-grow 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.3s;
+}
+
+.snag-how__tile h3 {
+  margin: 0 0 1.2rem;
+  font-size: 2.4rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+
+.snag-how__tile p { margin: 0; font-size: 1.5rem; line-height: 1.55; }
+
+@media screen and (min-width: 990px) {
+  .snag-how__tiles { flex-direction: row; gap: 2.4rem; min-height: 32rem; }
+  .snag-how__tile { padding: 3.2rem; display: flex; flex-direction: column; justify-content: flex-end; }
+  .snag-how__tile h3 { font-size: 3rem; }
+  .snag-how__tiles:hover .snag-how__tile { flex-grow: 0.8; }
+  .snag-how__tiles .snag-how__tile:hover { flex-grow: 1.8; background: rgb(var(--color-button)); color: rgb(var(--color-button-text)); }
+}
+
+/* ---------- Social feed ---------- */
+.snag-social__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+@media screen and (min-width: 990px) { .snag-social__grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1.2rem; } }
+
+.snag-social__item { display: block; aspect-ratio: 1; background: rgba(var(--color-foreground), 0.08); overflow: hidden; }
+.snag-social__item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.snag-social__item svg { width: 100%; height: 100%; display: block; }
+
+.snag-social__handles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem 3.2rem;
+  margin: 2.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.snag-social__handles a {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 0.2rem solid rgb(var(--color-button));
+  padding-bottom: 0.2rem;
+}
+
+/* ---------- Product page blocks ---------- */
+.snag-deal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.6rem;
+  margin: 0.4rem 0 1.6rem;
+}
+
+.snag-deal__save {
+  padding: 0.6rem 1rem;
+  background: rgb(var(--color-button));
+  color: rgb(var(--color-button-text));
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.snag-deal__line { font-size: 1.5rem; }
+.snag-deal__stock { font-size: 1.5rem; font-weight: 600; }
+
+.snag-fulfil { margin: 2rem 0; }
+
+.snag-fulfil__title { font-size: 1.6rem; font-weight: 600; margin: 0 0 1rem; }
+
+.snag-fulfil__options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.snag-fulfil__option { position: relative; }
+.snag-fulfil__option input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+
+.snag-fulfil__option span {
+  display: block;
+  padding: 1.2rem 1rem;
+  background: rgba(var(--color-foreground), 0.06);
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.snag-fulfil__option input:checked + span { background: rgb(var(--color-foreground)); color: rgb(var(--color-background)); }
+.snag-fulfil__option input:focus-visible + span { outline: 0.2rem solid rgb(var(--color-button)); outline-offset: 0.2rem; }
+
+.snag-fulfil__detail {
+  display: none;
+  padding: 1.2rem 0 0;
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+.snag-fulfil__detail p { margin: 0; }
+.snag-fulfil__detail strong { font-weight: 600; }
+
+.snag-fulfil[data-choice='pickup-1'] .snag-fulfil__detail--1,
+.snag-fulfil[data-choice='pickup-2'] .snag-fulfil__detail--2,
+.snag-fulfil[data-choice='delivery'] .snag-fulfil__detail--3 { display: block; }
+
+.snag-fulfil__ship { margin: 1rem 0 0; font-size: 1.3rem; color: rgba(var(--color-foreground), 0.75); }
+
+.snag-ask {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0.4rem 0 1.6rem;
+  padding: 1.2rem 1.8rem;
+  background: transparent;
+  color: rgb(var(--color-foreground));
+  border: 0.2rem solid rgb(var(--color-foreground));
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.snag-ask:hover { background: rgb(var(--color-foreground)); color: rgb(var(--color-background)); }
+.snag-ask svg { width: 1.8rem; height: 1.8rem; }

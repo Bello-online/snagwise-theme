@@ -1,0 +1,80 @@
+{%- comment -%}
+  SnagWise product card: cut-out on white, title, Snagged price with the retail price struck through,
+  "You save" in the accent, stock count, "Just landed" marker.
+
+  Accepts:
+  - card_product: {Object} product
+  - low_threshold: {Number} show "Only N left" at or below this quantity (default 3)
+  - new_days: {Number} products created within this many days get the new label (default 7)
+  - new_label: {String} text for the new label (default "Just landed")
+{%- endcomment -%}
+
+{%- liquid
+  assign low_threshold = low_threshold | default: 3
+  assign new_days = new_days | default: 7
+  assign new_label = new_label | default: 'Just landed'
+  assign variant = card_product.selected_or_first_available_variant
+  assign image = card_product.featured_image
+  assign saves = 0
+  if variant.compare_at_price > variant.price
+    assign saves = variant.compare_at_price | minus: variant.price
+  endif
+  assign qty = -1
+  if variant.inventory_management == 'shopify'
+    assign qty = variant.inventory_quantity
+  endif
+  assign is_new = false
+  if card_product.tags contains 'new'
+    assign is_new = true
+  else
+    assign age_seconds = 'now' | date: '%s' | minus: card_product.created_at
+    assign created = card_product.created_at | date: '%s'
+    assign now = 'now' | date: '%s'
+    assign age_days = now | minus: created | divided_by: 86400
+    if age_days <= new_days
+      assign is_new = true
+    endif
+  endif
+-%}
+
+<a href="{{ card_product.url }}" class="snag-card{% unless card_product.available %} snag-card--sold-out{% endunless %}">
+  <span class="snag-card__media">
+    {%- if image != blank -%}
+      {{
+        image
+        | image_url: width: 800
+        | image_tag:
+          width: image.width,
+          height: image.height,
+          loading: 'lazy',
+          sizes: '(min-width: 990px) 25vw, 50vw',
+          widths: '300, 400, 600, 800',
+          alt: image.alt
+      }}
+    {%- endif -%}
+    {%- if card_product.available == false -%}
+      <span class="snag-card__flag snag-card__flag--gone">Snagged</span>
+    {%- elsif is_new -%}
+      <span class="snag-card__flag">{{ new_label | escape }}</span>
+    {%- endif -%}
+  </span>
+  <span class="snag-card__body">
+    <span class="snag-card__title">{{ card_product.title | escape }}</span>
+    <span class="snag-card__price">
+      <span class="snag-card__now">{{ variant.price | money_without_trailing_zeros }}</span>
+      {%- if saves > 0 -%}
+        <s class="snag-card__was">{{ variant.compare_at_price | money_without_trailing_zeros }}</s>
+      {%- endif -%}
+    </span>
+    {%- if saves > 0 -%}
+      <span class="snag-card__save">You save {{ saves | money_without_trailing_zeros }}</span>
+    {%- endif -%}
+    {%- if card_product.available == false -%}
+      <span class="snag-card__stock">Gone. Next drop is coming.</span>
+    {%- elsif qty > 0 and qty <= low_threshold -%}
+      <span class="snag-card__stock snag-card__stock--low">Only {{ qty }} left</span>
+    {%- elsif qty > 0 -%}
+      <span class="snag-card__stock">{{ qty }} left</span>
+    {%- endif -%}
+  </span>
+</a>

@@ -1,0 +1,110 @@
+{{ 'snag.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #How-{{ section.id }} { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+{%- endstyle -%}
+
+<div id="How-{{ section.id }}" class="snag-how color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    <div class="snag-head">
+      <h2 class="snag-head__heading">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="snag-head__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+      {%- if section.settings.link_label != blank and section.settings.link != blank -%}
+        <a href="{{ section.settings.link }}" class="snag-head__link">{{ section.settings.link_label | escape }}</a>
+      {%- endif -%}
+    </div>
+
+    <ul class="snag-how__tiles">
+      {%- for block in section.blocks -%}
+        <li class="snag-how__tile" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.heading }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SnagWise how it works",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 4,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How SnagWise works"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Read the full how-to"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "We find sealed stock" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Overstock, open-box returns that were never opened, end-of-line units. Brand new, in the box, with the receipt." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SnagWise how it works",
+      "blocks": [
+        { "type": "step", "settings": { "heading": "We find sealed stock", "text": "Overstock, cancelled orders, end-of-line units. Brand new, in the box, receipt available." } },
+        { "type": "step", "settings": { "heading": "You snag it under retail", "text": "Every item shows the retail price next to ours. Limited quantities, one drop a week, first come first served." } },
+        { "type": "step", "settings": { "heading": "Pick up or get it dropped", "text": "Free pickup in Hamilton or Waterloo, flat-fee delivery across the GTHA and Waterloo, Canada-wide shipping on small items." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

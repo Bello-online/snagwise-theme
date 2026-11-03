@@ -1,0 +1,29 @@
+{%- comment -%}
+  Two lines under Dawn's own product card: "You save $X" and the stock count.
+  Accepts: card_product
+{%- endcomment -%}
+{%- liquid
+  assign variant = card_product.selected_or_first_available_variant
+  assign saves = 0
+  if variant.compare_at_price > variant.price
+    assign saves = variant.compare_at_price | minus: variant.price
+  endif
+  assign qty = -1
+  if variant.inventory_management == 'shopify'
+    assign qty = variant.inventory_quantity
+  endif
+-%}
+{%- if saves > 0 or qty > 0 or card_product.available == false -%}
+  <div class="snag-card-meta">
+    {%- if saves > 0 -%}
+      <span class="snag-card__save">You save {{ saves | money_without_trailing_zeros }}</span>
+    {%- endif -%}
+    {%- if card_product.available == false -%}
+      <span class="snag-card__stock">Gone. Next drop is coming.</span>
+    {%- elsif qty > 0 and qty <= 3 -%}
+      <span class="snag-card__stock snag-card__stock--low">Only {{ qty }} left</span>
+    {%- elsif qty > 0 -%}
+      <span class="snag-card__stock">{{ qty }} left</span>
+    {%- endif -%}
+  </div>
+{%- endif -%}

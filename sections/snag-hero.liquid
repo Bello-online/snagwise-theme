@@ -1,0 +1,224 @@
+{{ 'section-snag-hero.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign product = section.settings.product
+  assign image = section.settings.image
+  if image == blank and product != blank
+    assign image = product.featured_image
+  endif
+  assign variant = product.selected_or_first_available_variant
+  assign button_link = section.settings.button_link
+  if button_link == blank and product != blank
+    assign button_link = product.url
+  endif
+
+  assign fact = ''
+  if section.settings.show_fact and variant != blank
+    assign fact = variant.price | money_without_trailing_zeros
+    if variant.compare_at_price > variant.price
+      assign retail = variant.compare_at_price | money_without_trailing_zeros
+      assign fact = fact | append: ' · retail ' | append: retail
+    endif
+    if variant.inventory_management == 'shopify' and variant.inventory_quantity > 0
+      assign fact = fact | append: ' · ' | append: variant.inventory_quantity | append: ' left'
+    endif
+  endif
+-%}
+
+<div
+  id="SnagHero-{{ section.id }}"
+  class="snag-hero color-{{ section.settings.color_scheme }} gradient"
+  style="--snag-object-height: {{ section.settings.object_size }}%; --snag-object-rotate: {{ section.settings.object_rotate }}deg;"
+>
+  <div class="snag-hero__object">
+    {%- if image != blank -%}
+      <a href="{{ button_link | default: '#' }}" class="snag-hero__object-link" {% if product != blank %}aria-label="{{ product.title | escape }}"{% endif %}>
+        {{
+          image
+          | image_url: width: 1800
+          | image_tag:
+            width: image.width,
+            height: image.height,
+            class: 'snag-hero__image',
+            widths: '600, 900, 1200, 1500, 1800',
+            sizes: '(min-width: 990px) 60vw, 100vw',
+            loading: 'eager',
+            fetchpriority: 'high'
+        }}
+      </a>
+    {%- endif -%}
+  </div>
+
+  <div class="snag-hero__copy">
+    {%- if section.settings.heading != blank -%}
+      <h1 class="snag-hero__heading">{{ section.settings.heading }}</h1>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="snag-hero__text rte">{{ section.settings.text }}</div>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a
+        {% if button_link == blank %}
+          role="link" aria-disabled="true"
+        {% else %}
+          href="{{ button_link }}"
+        {% endif %}
+        class="button snag-hero__button"
+      >
+        {{- section.settings.button_label | escape -}}
+      </a>
+    {%- endif -%}
+  </div>
+
+  {%- if fact != blank -%}
+    <p class="snag-hero__fact"><span class="snag-hero__dot" aria-hidden="true"></span>{{ fact }}</p>
+  {%- endif -%}
+
+  {%- if section.settings.card_1_collection != blank or section.settings.card_2_collection != blank -%}
+    <div class="snag-hero__cards">
+      {%- for i in (1..2) -%}
+        {%- liquid
+          assign key = 'card_' | append: i | append: '_collection'
+          assign label_key = 'card_' | append: i | append: '_label'
+          assign collection = section.settings[key]
+          assign label = section.settings[label_key]
+          if label == blank and collection != blank
+            assign label = collection.title
+          endif
+          assign card_image = collection.image
+          if card_image == blank
+            assign card_image = collection.products.first.featured_image
+          endif
+        -%}
+        {%- if collection != blank -%}
+          <a href="{{ collection.url }}" class="snag-hero__card">
+            <span class="snag-hero__card-media">
+              {%- if card_image != blank -%}
+                {{
+                  card_image
+                  | image_url: width: 600
+                  | image_tag: width: card_image.width, height: card_image.height, loading: 'lazy', sizes: '220px', widths: '300, 450, 600', alt: ''
+                }}
+              {%- endif -%}
+            </span>
+            <span class="snag-hero__card-bar">
+              <span>{{ label | escape }}</span>
+              <span aria-hidden="true">&rarr;</span>
+            </span>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "SnagWise hero",
+  "tag": "section",
+  "class": "section section-snag-hero",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Hero deal",
+      "info": "Its photo becomes the large object and its price feeds the fact line. The button links to it unless a link is set."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Object image override",
+      "info": "A PNG with a transparent background looks best on the dark field. Leave empty to use the product's featured image."
+    },
+    {
+      "type": "range",
+      "id": "object_size",
+      "min": 80,
+      "max": 140,
+      "step": 10,
+      "unit": "%",
+      "label": "Object height on desktop",
+      "default": 118
+    },
+    {
+      "type": "range",
+      "id": "object_rotate",
+      "min": -12,
+      "max": 12,
+      "step": 2,
+      "unit": "°",
+      "label": "Object tilt",
+      "default": -6
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Name brands.<br>Under retail."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Brand new, factory sealed, picked up in Hamilton or Waterloo or dropped at your door. When it's gone, it's gone.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop this week's drop"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_fact",
+      "label": "Show the price, retail price and stock beside the object",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Corner cards"
+    },
+    {
+      "type": "collection",
+      "id": "card_1_collection",
+      "label": "Card 1 collection"
+    },
+    {
+      "type": "text",
+      "id": "card_1_label",
+      "label": "Card 1 label",
+      "default": "Almost gone"
+    },
+    {
+      "type": "collection",
+      "id": "card_2_collection",
+      "label": "Card 2 collection"
+    },
+    {
+      "type": "text",
+      "id": "card_2_label",
+      "label": "Card 2 label",
+      "default": "Just landed"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SnagWise hero"
+    }
+  ]
+}
+{% endschema %}

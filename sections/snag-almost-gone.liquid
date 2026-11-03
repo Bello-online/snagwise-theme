@@ -1,0 +1,182 @@
+{{ 'snag.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #Gone-{{ section.id }} { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+{%- endstyle -%}
+
+{%- liquid
+  assign collection = section.settings.collection
+  assign threshold = section.settings.threshold
+  assign limit = section.settings.rows
+-%}
+
+<div id="Gone-{{ section.id }}" class="snag-gone color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    <div class="snag-head">
+      <h2 class="snag-head__heading">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="snag-head__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+      {%- if section.settings.show_view_all and collection != blank -%}
+        <a href="{{ collection.url }}" class="snag-head__link">{{ section.settings.view_all_label | default: 'See everything on its last units' | escape }}</a>
+      {%- endif -%}
+    </div>
+
+    {%- if collection != blank -%}
+      {%- assign shown = 0 -%}
+      <ul class="snag-gone__rows">
+        {%- for product in collection.products -%}
+          {%- liquid
+            if shown >= limit
+              break
+            endif
+            assign variant = product.selected_or_first_available_variant
+            assign qty = -1
+            if variant.inventory_management == 'shopify'
+              assign qty = variant.inventory_quantity
+            endif
+            if product.available == false
+              continue
+            endif
+            if section.settings.filter_by_stock and qty > threshold
+              continue
+            endif
+            assign shown = shown | plus: 1
+            assign image = product.featured_image
+          -%}
+          <li>
+            <a href="{{ product.url }}" class="snag-gone__row">
+              <span class="snag-gone__thumb">
+                {%- if image != blank -%}
+                  {{ image | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90, 180', sizes: '90px', alt: '' }}
+                {%- endif -%}
+              </span>
+              <span class="snag-gone__name">
+                {{ product.title | escape }}
+                {%- if section.settings.note != blank -%}
+                  <span class="snag-gone__note">{{ section.settings.note | escape }}</span>
+                {%- endif -%}
+              </span>
+              <span class="snag-gone__deal">
+                {{ variant.price | money_without_trailing_zeros }}
+                {%- if qty > 0 -%}
+                  <small>{% if qty == 1 %}Last one{% else %}{{ qty }} left{% endif %}</small>
+                {%- elsif variant.compare_at_price > variant.price -%}
+                  <small>retail {{ variant.compare_at_price | money_without_trailing_zeros }}</small>
+                {%- endif -%}
+              </span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- if shown == 0 and request.design_mode -%}
+        <p class="snag-head__text">Nothing in this collection is at or below {{ threshold }} units right now. Lower the threshold or turn off the stock filter.</p>
+      {%- endif -%}
+    {%- elsif request.design_mode -%}
+      <p class="snag-head__text">Pick a collection in the section settings. Last chance is the usual choice.</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SnagWise almost gone",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Almost gone"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Last units. Pickup in Hamilton or Waterloo, delivery across the GTHA."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "filter_by_stock",
+      "label": "Only show items at or below the stock threshold",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "threshold",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Stock threshold",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "rows",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "label": "Rows to show",
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Line under every item",
+      "default": "Factory sealed · receipt available"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show a link to the collection",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "Link label",
+      "default": "See everything on its last units"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-5"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "SnagWise almost gone"
+    }
+  ]
+}
+{% endschema %}
