@@ -412,3 +412,6 @@
 
 .snag-ask:hover { background: rgb(var(--color-foreground)); color: rgb(var(--color-background)); }
 .snag-ask svg { width: 1.8rem; height: 1.8rem; }
+
+/* The lime "You save" line replaces Dawn's Sale badge on the product page */
+.product .price__badge-sale { display: none; }
