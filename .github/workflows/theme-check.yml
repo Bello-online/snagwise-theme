@@ -2,9 +2,9 @@ name: Theme check
 
 on:
   push:
-    branches: [main]
+    branches: [main, pine]
   pull_request:
-    branches: [main]
+    branches: [main, pine]
 
 jobs:
   theme-check:
@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      checks: write
-      pull-requests: write
     steps:
       - uses: actions/checkout@v4
-      - uses: shopify/theme-check-action@v2
+      - uses: actions/setup-node@v4
         with:
-          theme_root: '.'
-          flags: '--fail-level error'
-          token: ${{ github.token }}
+          node-version: 20
+      - name: Install Shopify CLI
+        run: npm install -g @shopify/cli
+      - name: Theme check
+        run: shopify theme check --fail-level error
