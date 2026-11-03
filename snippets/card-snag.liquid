@@ -27,7 +27,6 @@
   if card_product.tags contains 'new'
     assign is_new = true
   else
-    assign age_seconds = 'now' | date: '%s' | minus: card_product.created_at
     assign created = card_product.created_at | date: '%s'
     assign now = 'now' | date: '%s'
     assign age_days = now | minus: created | divided_by: 86400
