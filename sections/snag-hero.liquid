@@ -51,7 +51,7 @@
 
   <div class="snag-hero__copy">
     {%- if section.settings.heading != blank -%}
-      <h1 class="snag-hero__heading">{{ section.settings.heading }}</h1>
+      <h1 class="snag-hero__heading">{{ section.settings.heading | escape | replace: '|', '<br>' }}</h1>
     {%- endif -%}
     {%- if section.settings.text != blank -%}
       <div class="snag-hero__text rte">{{ section.settings.text }}</div>
@@ -154,10 +154,11 @@
       "default": -6
     },
     {
-      "type": "inline_richtext",
+      "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Name brands.<br>Under retail."
+      "info": "Use | where the line should break.",
+      "default": "Name brands.|Under retail."
     },
     {
       "type": "richtext",
