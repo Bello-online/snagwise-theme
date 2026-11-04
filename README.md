@@ -6,18 +6,20 @@ Fork of Shopify Dawn 16.0.0 with the shared conversion layer used across the Bel
 
 ## Two themes, two branches
 
-| Branch | Theme in the store | Palette |
+| Branch | Theme in the store | Ground |
 | --- | --- | --- |
-| `main` | SnagWise Soot | #0F0F0F ground, #1A1A1A surface, #DAFA9C lime, white paper |
-| `pine` | SnagWise Pine | #0B2E24 ground, #124034 surface, #DAFA9C lime, #EEF3EF paper |
+| `main` | SnagWise Forest | Paper #F6F4EE ground (the brand mockup) |
+| `pine` | SnagWise Pine | Deep pine #0B2E24 ground under the same white panels |
 
-The only difference between the branches is `config/settings_data.json` (the five colour schemes). Build features on `main`, then `git checkout pine && git rebase main` to carry them across.
+Both use the brand palette from the logo sheet, option A "Tag check": Forest #0E3B2E, Citrus #D4F25C, Paper #F6F4EE. The only difference between the branches is `config/settings_data.json` (scheme-4, which is the page ground, and the card colour scheme). Build features on `main`, then `git checkout pine && git merge main` to carry them across.
 
-Through Shopify's GitHub integration each branch connects to its own theme in the store's theme library (Online Store > Themes > Add theme > Connect from GitHub). Pushes sync to the theme; edits made in the theme editor come back as "Update from Shopify" commits, so always `git fetch` and rebase before pushing.
+Through Shopify's GitHub integration each branch connects to its own theme in the store's theme library (Online Store > Themes > Add theme > Connect from GitHub). Pushes sync to the theme; edits made in the theme editor come back as "Update from Shopify" commits, so always `git fetch` and merge before pushing.
 
 ## The SnagWise layer
 
-Direction: "the object, large". One product cut-out breaks the right edge of a flat dark field, the copy sits small on the left, and two corner cards point at Almost gone and Just landed. Archivo only (400 for headlines, 600 for buttons and prices), square corners, no shadows or gradients, lime reserved for savings and the one action.
+Brand: logo option A "Tag check" (forest tag with a citrus check, lowercase wordmark), Space Grotesk (700 for headlines, prices and buttons, 400 for body). The page is a paper ground on which every section floats as a rounded panel (`--snag-radius: 1.6rem`) with gutters; the header is a white card with the logo left and the menu right. Prices are the loudest thing on every surface: large and bold with the usual price struck through beside them, a citrus "You save $X" chip, and a citrus "Snag it" button on every card and on the product page (Dawn's dynamic checkout button is off so there is one action; Dawn's "Sale" badges are removed). The hero headline carries its second sentence in citrus ("Same stuff. Smarter price.") and its price fact is a citrus chip. No shadows, no gradients, no thin rules.
+
+Files: `assets/snag-brand.css` (ground, panels, header card, corners, price sizes), `assets/snag.css` (components), `assets/section-snag-hero.css` (hero), `snippets/snag-wordmark.liquid` (logo from `assets/snagwise-logo-forest.png` / `-paper.png`; set a logo in Theme settings to override), `assets/snagwise-icon.png` (favicon fallback). Logo sources and the supplied logo sheet live in `../media/snagwise/logo/`.
 
 Sections (all in `sections/snag-*.liquid`, styles in `assets/snag.css` and `assets/section-snag-hero.css`):
 
