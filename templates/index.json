@@ -152,7 +152,7 @@
           "type": "step",
           "settings": {
             "heading": "Free delivery in Waterloo",
-            "text": "Free pickup and free local delivery in Waterloo, flat-fee delivery across the GTA and Waterloo Region, Canada-wide shipping on small items."
+            "text": "Free local delivery in Waterloo, flat-fee delivery across the GTA and Waterloo Region, Canada-wide shipping on small items."
           }
         }
       },
@@ -195,7 +195,7 @@
           "settings": {
             "icon": "map_pin",
             "heading": "Free local delivery",
-            "text": "Free in Waterloo, pickup too"
+            "text": "Free anywhere in Waterloo"
           }
         },
         "t4": {

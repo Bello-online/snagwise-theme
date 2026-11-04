@@ -394,9 +394,9 @@
 .snag-fulfil__detail p { margin: 0; }
 .snag-fulfil__detail strong { font-weight: 600; }
 
-.snag-fulfil[data-choice='pickup-1'] .snag-fulfil__detail--1,
-.snag-fulfil[data-choice='pickup-2'] .snag-fulfil__detail--2,
-.snag-fulfil[data-choice='delivery'] .snag-fulfil__detail--3 { display: block; }
+.snag-fulfil[data-choice='option-1'] .snag-fulfil__detail--1,
+.snag-fulfil[data-choice='option-2'] .snag-fulfil__detail--2,
+.snag-fulfil[data-choice='option-3'] .snag-fulfil__detail--3 { display: block; }
 
 .snag-fulfil__ship { margin: 1rem 0 0; font-size: 1.3rem; color: rgba(var(--color-foreground), 0.75); }
 

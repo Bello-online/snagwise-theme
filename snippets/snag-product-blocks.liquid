@@ -34,21 +34,21 @@
     </div>
 
   {%- when 'snag_fulfilment' -%}
-    <div class="snag-fulfil" data-choice="pickup-1" {{ block.shopify_attributes }}>
+    <div class="snag-fulfil" data-choice="option-1" {{ block.shopify_attributes }}>
       {%- if block.settings.title != blank -%}
         <p class="snag-fulfil__title">{{ block.settings.title | escape }}</p>
       {%- endif -%}
-      <div class="snag-fulfil__options" role="radiogroup" aria-label="{{ block.settings.title | default: 'Pickup or delivery' | escape }}">
+      <div class="snag-fulfil__options" role="radiogroup" aria-label="{{ block.settings.title | default: 'Delivery' | escape }}">
         <label class="snag-fulfil__option">
-          <input type="radio" name="snag-fulfil-{{ block.id }}" value="pickup-1" checked>
+          <input type="radio" name="snag-fulfil-{{ block.id }}" value="option-1" checked>
           <span>{{ block.settings.pickup_1_label | escape }}</span>
         </label>
         <label class="snag-fulfil__option">
-          <input type="radio" name="snag-fulfil-{{ block.id }}" value="pickup-2">
+          <input type="radio" name="snag-fulfil-{{ block.id }}" value="option-2">
           <span>{{ block.settings.pickup_2_label | escape }}</span>
         </label>
         <label class="snag-fulfil__option">
-          <input type="radio" name="snag-fulfil-{{ block.id }}" value="delivery">
+          <input type="radio" name="snag-fulfil-{{ block.id }}" value="option-3">
           <span>{{ block.settings.delivery_label | escape }}</span>
         </label>
       </div>
