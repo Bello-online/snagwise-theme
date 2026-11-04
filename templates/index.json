@@ -6,8 +6,9 @@
         "product": "wireless-over-ear-headphones",
         "object_size": 110,
         "object_rotate": -6,
-        "heading": "Name brands.|Under retail.",
-        "text": "<p>Brand new, factory sealed, picked up in Hamilton or Waterloo or dropped at your door. When it's gone, it's gone.</p>",
+        "heading": "Same stuff.",
+        "heading_accent": "Smarter price.",
+        "text": "<p>The brand-name products you already buy, for less than the usual retail price. Sealed, receipted, picked up in Hamilton or Waterloo or dropped at your door.</p>",
         "button_label": "Shop this week's drop",
         "button_link": "shopify://collections/this-weeks-drop",
         "show_fact": true,
@@ -54,21 +55,78 @@
     "snag_categories": {
       "type": "snag-categories",
       "blocks": {
-        "home": { "type": "tile", "settings": { "collection": "home-kitchen", "label": "" } },
-        "vac": { "type": "tile", "settings": { "collection": "vacuums-cleaning", "label": "" } },
-        "audio": { "type": "tile", "settings": { "collection": "audio-tech", "label": "" } },
-        "toys": { "type": "tile", "settings": { "collection": "toys-collectibles", "label": "" } },
-        "baby": { "type": "tile", "settings": { "collection": "baby-kids", "label": "" } },
-        "tools": { "type": "tile", "settings": { "collection": "tools-auto", "label": "" } },
-        "under": { "type": "tile", "settings": { "collection": "under-50", "label": "" } },
-        "last": { "type": "tile", "settings": { "collection": "last-chance", "label": "" } }
+        "home": {
+          "type": "tile",
+          "settings": {
+            "collection": "home-kitchen",
+            "label": ""
+          }
+        },
+        "vac": {
+          "type": "tile",
+          "settings": {
+            "collection": "vacuums-cleaning",
+            "label": ""
+          }
+        },
+        "audio": {
+          "type": "tile",
+          "settings": {
+            "collection": "audio-tech",
+            "label": ""
+          }
+        },
+        "toys": {
+          "type": "tile",
+          "settings": {
+            "collection": "toys-collectibles",
+            "label": ""
+          }
+        },
+        "baby": {
+          "type": "tile",
+          "settings": {
+            "collection": "baby-kids",
+            "label": ""
+          }
+        },
+        "tools": {
+          "type": "tile",
+          "settings": {
+            "collection": "tools-auto",
+            "label": ""
+          }
+        },
+        "under": {
+          "type": "tile",
+          "settings": {
+            "collection": "under-50",
+            "label": ""
+          }
+        },
+        "last": {
+          "type": "tile",
+          "settings": {
+            "collection": "last-chance",
+            "label": ""
+          }
+        }
       },
-      "block_order": ["home", "vac", "audio", "toys", "baby", "tools", "under", "last"],
+      "block_order": [
+        "home",
+        "vac",
+        "audio",
+        "toys",
+        "baby",
+        "tools",
+        "under",
+        "last"
+      ],
       "settings": {
         "heading": "Shop by category",
         "text": "",
         "columns_desktop": "4",
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-3",
         "padding_top": 64,
         "padding_bottom": 64
       }
@@ -76,11 +134,33 @@
     "snag_how": {
       "type": "snag-how",
       "blocks": {
-        "s1": { "type": "step", "settings": { "heading": "We find sealed stock", "text": "Overstock, cancelled orders, end-of-line units. Brand new, in the box, receipt available on request." } },
-        "s2": { "type": "step", "settings": { "heading": "You snag it under retail", "text": "Every item shows the retail price next to ours. Limited quantities, one drop a week, first come first served." } },
-        "s3": { "type": "step", "settings": { "heading": "Pick up or get it dropped", "text": "Free pickup in Hamilton or Waterloo, flat-fee delivery across the GTHA and Waterloo Region, Canada-wide shipping on small items." } }
+        "s1": {
+          "type": "step",
+          "settings": {
+            "heading": "We find sealed stock",
+            "text": "Overstock, cancelled orders, end-of-line units. Brand new, in the box, receipt available on request."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "heading": "You snag it under retail",
+            "text": "Every item shows the retail price next to ours. Limited quantities, one drop a week, first come first served."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "heading": "Pick up or get it dropped",
+            "text": "Free pickup in Hamilton or Waterloo, flat-fee delivery across the GTHA and Waterloo Region, Canada-wide shipping on small items."
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3"],
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
       "settings": {
         "heading": "How SnagWise works",
         "text": "",
@@ -94,12 +174,45 @@
     "trust": {
       "type": "trust-bar",
       "blocks": {
-        "t1": { "type": "item", "settings": { "icon": "box", "heading": "Brand new & sealed", "text": "Never opened, never used" } },
-        "t2": { "type": "item", "settings": { "icon": "check_mark", "heading": "Receipts available", "text": "Proof of purchase on request" } },
-        "t3": { "type": "item", "settings": { "icon": "map_pin", "heading": "Local pickup", "text": "Hamilton and Waterloo, free" } },
-        "t4": { "type": "item", "settings": { "icon": "lock", "heading": "Secure checkout", "text": "Shop Pay, Apple Pay, cards" } }
+        "t1": {
+          "type": "item",
+          "settings": {
+            "icon": "box",
+            "heading": "Brand new & sealed",
+            "text": "Never opened, never used"
+          }
+        },
+        "t2": {
+          "type": "item",
+          "settings": {
+            "icon": "check_mark",
+            "heading": "Receipts available",
+            "text": "Proof of purchase on request"
+          }
+        },
+        "t3": {
+          "type": "item",
+          "settings": {
+            "icon": "map_pin",
+            "heading": "Local pickup",
+            "text": "Hamilton and Waterloo, free"
+          }
+        },
+        "t4": {
+          "type": "item",
+          "settings": {
+            "icon": "lock",
+            "heading": "Secure checkout",
+            "text": "Shop Pay, Apple Pay, cards"
+          }
+        }
       },
-      "block_order": ["t1", "t2", "t3", "t4"],
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "settings": {
         "color_scheme": "scheme-4",
         "padding_top": 28,
@@ -109,14 +222,39 @@
     "snag_social": {
       "type": "snag-social",
       "blocks": {
-        "p1": { "type": "post", "settings": {} },
-        "p2": { "type": "post", "settings": {} },
-        "p3": { "type": "post", "settings": {} },
-        "p4": { "type": "post", "settings": {} },
-        "p5": { "type": "post", "settings": {} },
-        "p6": { "type": "post", "settings": {} }
+        "p1": {
+          "type": "post",
+          "settings": {}
+        },
+        "p2": {
+          "type": "post",
+          "settings": {}
+        },
+        "p3": {
+          "type": "post",
+          "settings": {}
+        },
+        "p4": {
+          "type": "post",
+          "settings": {}
+        },
+        "p5": {
+          "type": "post",
+          "settings": {}
+        },
+        "p6": {
+          "type": "post",
+          "settings": {}
+        }
       },
-      "block_order": ["p1", "p2", "p3", "p4", "p5", "p6"],
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "p6"
+      ],
       "settings": {
         "heading": "Drops land on the feed first",
         "text": "Unboxings, stock counts and the Thursday drop preview.",
@@ -133,11 +271,29 @@
     "newsletter": {
       "type": "newsletter",
       "blocks": {
-        "heading": { "type": "heading", "settings": { "heading": "Get first dibs on new drops", "heading_size": "h1" } },
-        "paragraph": { "type": "paragraph", "settings": { "text": "<p>One message when the drop lands, usually Thursday. No spam, ever.</p>" } },
-        "email_form": { "type": "email_form", "settings": {} }
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Get first dibs on new drops",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>One message when the drop lands, usually Thursday. No spam, ever.</p>"
+          }
+        },
+        "email_form": {
+          "type": "email_form",
+          "settings": {}
+        }
       },
-      "block_order": ["heading", "paragraph", "email_form"],
+      "block_order": [
+        "heading",
+        "paragraph",
+        "email_form"
+      ],
       "settings": {
         "color_scheme": "scheme-5",
         "full_width": true,
@@ -146,5 +302,14 @@
       }
     }
   },
-  "order": ["snag_hero", "snag_drop", "snag_gone", "snag_categories", "snag_how", "trust", "snag_social", "newsletter"]
+  "order": [
+    "snag_hero",
+    "snag_drop",
+    "snag_gone",
+    "snag_categories",
+    "snag_how",
+    "trust",
+    "snag_social",
+    "newsletter"
+  ]
 }

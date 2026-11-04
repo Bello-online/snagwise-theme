@@ -13,7 +13,7 @@
     assign qty = variant.inventory_quantity
   endif
 -%}
-{%- if saves > 0 or qty > 0 or card_product.available == false -%}
+{%- if saves > 0 or qty > 0 or card_product.available == false or card_product.available -%}
   <div class="snag-card-meta">
     {%- if saves > 0 -%}
       <span class="snag-card__save">You save {{ saves | money_without_trailing_zeros }}</span>
@@ -24,6 +24,9 @@
       <span class="snag-card__stock snag-card__stock--low">Only {{ qty }} left</span>
     {%- elsif qty > 0 -%}
       <span class="snag-card__stock">{{ qty }} left</span>
+    {%- endif -%}
+    {%- if card_product.available -%}
+      <span class="button snag-card__cta">Snag it</span>
     {%- endif -%}
   </div>
 {%- endif -%}

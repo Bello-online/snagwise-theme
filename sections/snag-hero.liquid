@@ -14,14 +14,23 @@
 
   assign fact = ''
   if section.settings.show_fact and variant != blank
-    assign fact = variant.price | money_without_trailing_zeros
-    if variant.compare_at_price > variant.price
-      assign retail = variant.compare_at_price | money_without_trailing_zeros
-      assign fact = fact | append: ' · retail ' | append: retail
-    endif
-    if variant.inventory_management == 'shopify' and variant.inventory_quantity > 0
-      assign fact = fact | append: ' · ' | append: variant.inventory_quantity | append: ' left'
-    endif
+    assign now = variant.price | money_without_trailing_zeros
+    capture fact
+      echo '<strong class="snag-hero__fact-price">'
+      echo now
+      echo '</strong>'
+      if variant.compare_at_price > variant.price
+        assign retail = variant.compare_at_price | money_without_trailing_zeros
+        echo '<s class="snag-hero__fact-was">'
+        echo retail
+        echo '</s>'
+      endif
+      if variant.inventory_management == 'shopify' and variant.inventory_quantity > 0
+        echo '<span class="snag-hero__fact-left">'
+        echo variant.inventory_quantity
+        echo ' left</span>'
+      endif
+    endcapture
   endif
 -%}
 
@@ -51,7 +60,7 @@
 
   <div class="snag-hero__copy">
     {%- if section.settings.heading != blank -%}
-      <h1 class="snag-hero__heading">{{ section.settings.heading | escape | replace: '|', '<br>' }}</h1>
+      <h1 class="snag-hero__heading">{{ section.settings.heading | escape | replace: '|', '<br>' }}{% if section.settings.heading_accent != blank %} <span class="snag-hero__accent">{{ section.settings.heading_accent | escape | replace: '|', '<br>' }}</span>{% endif %}</h1>
     {%- endif -%}
     {%- if section.settings.text != blank -%}
       <div class="snag-hero__text rte">{{ section.settings.text }}</div>
@@ -71,7 +80,7 @@
   </div>
 
   {%- if fact != blank -%}
-    <p class="snag-hero__fact"><span class="snag-hero__dot" aria-hidden="true"></span>{{ fact }}</p>
+    <p class="snag-hero__fact">{{ fact }}</p>
   {%- endif -%}
 
   {%- if section.settings.card_1_collection != blank or section.settings.card_2_collection != blank -%}
@@ -161,10 +170,17 @@
       "default": "Name brands.|Under retail."
     },
     {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading, second sentence (citrus)",
+      "default": "Smarter price.",
+      "info": "Set in the accent colour after the heading. Use | for a line break."
+    },
+    {
       "type": "richtext",
       "id": "text",
       "label": "Text",
-      "default": "<p>Brand new, factory sealed, picked up in Hamilton or Waterloo or dropped at your door. When it's gone, it's gone.</p>"
+      "default": "<p>The brand-name products you already buy, for less than the usual retail price. Sealed, receipted, picked up in Hamilton or Waterloo or dropped at your door.</p>"
     },
     {
       "type": "text",

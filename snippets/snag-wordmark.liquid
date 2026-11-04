@@ -1,0 +1,21 @@
+{%- comment -%}
+  SnagWise logo used when no logo image is set in Theme settings.
+  Option A "Tag check": forest tag with citrus check, lowercase wordmark. Source: media/snagwise/logo in the repo.
+  Pass `tone: 'paper'` for the light-on-dark version.
+{%- endcomment -%}
+{%- liquid
+  assign file = 'snagwise-logo-forest.png'
+  if tone == 'paper'
+    assign file = 'snagwise-logo-paper.png'
+  endif
+-%}
+<span class="snag-wordmark">
+  <img
+    class="snag-wordmark__img"
+    src="{{ file | asset_url }}"
+    width="800"
+    height="153"
+    alt="{{ shop.name | escape }}"
+    loading="eager"
+  >
+</span>

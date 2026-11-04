@@ -3,12 +3,36 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "title": { "type": "title" },
-        "price": { "type": "price" },
-        "deal": { "type": "snag_deal", "settings": { "condition": "Brand new · Factory sealed", "low_threshold": 3 } },
-        "variant_picker": { "type": "variant_picker", "settings": { "picker_type": "button", "swatch_shape": "square" } },
-        "quantity_selector": { "type": "quantity_selector" },
-        "buy_buttons": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": true, "show_gift_card_recipient": false } },
+        "title": {
+          "type": "title"
+        },
+        "price": {
+          "type": "price"
+        },
+        "deal": {
+          "type": "snag_deal",
+          "settings": {
+            "condition": "Brand new · Factory sealed",
+            "low_threshold": 3
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "square"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector"
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
         "fulfilment": {
           "type": "snag_fulfilment",
           "settings": {
@@ -22,11 +46,37 @@
             "shipping_note": "Small items ship across Canada. Rates show at checkout."
           }
         },
-        "ask": { "type": "snag_ask", "settings": { "label": "Ask about this item", "whatsapp": "", "instagram": "snagwise", "message": "Hi SnagWise, is [title] still available?" } },
-        "description": { "type": "description" },
-        "share": { "type": "share", "settings": { "share_label": "Share" } }
+        "ask": {
+          "type": "snag_ask",
+          "settings": {
+            "label": "Ask about this item",
+            "whatsapp": "",
+            "instagram": "snagwise",
+            "message": "Hi SnagWise, is [title] still available?"
+          }
+        },
+        "description": {
+          "type": "description"
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
       },
-      "block_order": ["title", "price", "deal", "variant_picker", "quantity_selector", "buy_buttons", "fulfilment", "ask", "description", "share"],
+      "block_order": [
+        "title",
+        "price",
+        "deal",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "fulfilment",
+        "ask",
+        "description",
+        "share"
+      ],
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-3",
@@ -62,5 +112,8 @@
       }
     }
   },
-  "order": ["main", "related-products"]
+  "order": [
+    "main",
+    "related-products"
+  ]
 }

@@ -7,6 +7,7 @@
   - low_threshold: {Number} show "Only N left" at or below this quantity (default 3)
   - new_days: {Number} products created within this many days get the new label (default 7)
   - new_label: {String} text for the new label (default "Just landed")
+  - cta_label: {String} button text (default "Snag it")
 {%- endcomment -%}
 
 {%- liquid
@@ -74,6 +75,9 @@
       <span class="snag-card__stock snag-card__stock--low">Only {{ qty }} left</span>
     {%- elsif qty > 0 -%}
       <span class="snag-card__stock">{{ qty }} left</span>
+    {%- endif -%}
+    {%- if card_product.available -%}
+      <span class="button snag-card__cta">{{ cta_label | default: 'Snag it' | escape }}</span>
     {%- endif -%}
   </span>
 </a>
