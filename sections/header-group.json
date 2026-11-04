@@ -14,16 +14,35 @@
         "enable_language_selector": false
       },
       "blocks": {
-        "a1": { "type": "announcement", "settings": { "text": "Free local pickup in Hamilton & Waterloo · Flat-fee delivery across the GTHA", "text_alignment": "center", "color_scheme": "scheme-5", "link": "shopify://pages/pickup-delivery" } },
-        "a2": { "type": "announcement", "settings": { "text": "New drop every week. When it's gone, it's gone.", "text_alignment": "center", "color_scheme": "scheme-5", "link": "shopify://collections/this-weeks-drop" } }
+        "a1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Free local pickup in Hamilton & Waterloo · Flat-fee delivery across the GTHA",
+            "text_alignment": "center",
+            "color_scheme": "scheme-5",
+            "link": "shopify://pages/pickup-delivery"
+          }
+        },
+        "a2": {
+          "type": "announcement",
+          "settings": {
+            "text": "New drop every week. When it's gone, it's gone.",
+            "text_alignment": "center",
+            "color_scheme": "scheme-5",
+            "link": "shopify://collections/this-weeks-drop"
+          }
+        }
       },
-      "block_order": ["a1", "a2"]
+      "block_order": [
+        "a1",
+        "a2"
+      ]
     },
     "header": {
       "type": "header",
       "settings": {
-        "color_scheme": "scheme-1",
-        "menu_color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
+        "menu_color_scheme": "scheme-3",
         "logo_position": "middle-left",
         "menu": "main-menu",
         "menu_type_desktop": "dropdown",
@@ -33,10 +52,13 @@
         "enable_language_selector": false,
         "mobile_logo_position": "center",
         "margin_bottom": 0,
-        "padding_top": 16,
-        "padding_bottom": 16
+        "padding_top": 12,
+        "padding_bottom": 12
       }
     }
   },
-  "order": ["announcement-bar", "header"]
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
 }

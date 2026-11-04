@@ -58,11 +58,12 @@
                 {%- endif -%}
               </span>
               <span class="snag-gone__deal">
-                {{ variant.price | money_without_trailing_zeros }}
+                <span class="snag-gone__now">{{ variant.price | money_without_trailing_zeros }}</span>
+                {%- if variant.compare_at_price > variant.price -%}
+                  <s class="snag-gone__was">{{ variant.compare_at_price | money_without_trailing_zeros }}</s>
+                {%- endif -%}
                 {%- if qty > 0 -%}
                   <small>{% if qty == 1 %}Last one{% else %}{{ qty }} left{% endif %}</small>
-                {%- elsif variant.compare_at_price > variant.price -%}
-                  <small>retail {{ variant.compare_at_price | money_without_trailing_zeros }}</small>
                 {%- endif -%}
               </span>
             </a>
