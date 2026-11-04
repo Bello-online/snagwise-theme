@@ -17,7 +17,7 @@
         "a1": {
           "type": "announcement",
           "settings": {
-            "text": "Free local pickup in Hamilton & Waterloo · Flat-fee delivery across the GTHA",
+            "text": "Free local delivery in Waterloo · Flat-fee delivery across the GTA",
             "text_alignment": "center",
             "color_scheme": "scheme-5",
             "link": "shopify://pages/pickup-delivery"

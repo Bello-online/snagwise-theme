@@ -5,7 +5,7 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "about": { "type": "text", "settings": { "heading": "SnagWise", "subtext": "<p>Brand-new, factory-sealed name-brand products under retail. Two brothers, one weekly drop, pickup in Hamilton and Waterloo, delivery across the GTHA.</p>" } },
+        "about": { "type": "text", "settings": { "heading": "SnagWise", "subtext": "<p>Brand-new, factory-sealed name-brand products under retail. Two brothers, one weekly drop, free local delivery in Waterloo, flat-fee delivery across the GTA.</p>" } },
         "shop": { "type": "link_list", "settings": { "heading": "Shop", "menu": "main-menu" } },
         "help": { "type": "link_list", "settings": { "heading": "Help", "menu": "footer" } }
       },

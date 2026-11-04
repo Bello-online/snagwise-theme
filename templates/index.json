@@ -8,7 +8,7 @@
         "object_rotate": -6,
         "heading": "Same stuff.",
         "heading_accent": "Smarter price.",
-        "text": "<p>The brand-name products you already buy, for less than the usual retail price. Sealed, receipted, picked up in Hamilton or Waterloo or dropped at your door.</p>",
+        "text": "<p>The brand-name products you already buy, for less than the usual retail price. Sealed, receipted, delivered free in Waterloo or dropped at your door across the GTA.</p>",
         "button_label": "Shop this week's drop",
         "button_link": "shopify://collections/this-weeks-drop",
         "show_fact": true,
@@ -39,7 +39,7 @@
       "type": "snag-almost-gone",
       "settings": {
         "heading": "Almost gone",
-        "text": "Last units. Pickup in Hamilton or Waterloo, delivery across the GTHA.",
+        "text": "Last units. Free local delivery in Waterloo, flat-fee delivery across the GTA.",
         "collection": "last-chance",
         "filter_by_stock": true,
         "threshold": 3,
@@ -151,8 +151,8 @@
         "s3": {
           "type": "step",
           "settings": {
-            "heading": "Pick up or get it dropped",
-            "text": "Free pickup in Hamilton or Waterloo, flat-fee delivery across the GTHA and Waterloo Region, Canada-wide shipping on small items."
+            "heading": "Free delivery in Waterloo",
+            "text": "Free pickup and free local delivery in Waterloo, flat-fee delivery across the GTA and Waterloo Region, Canada-wide shipping on small items."
           }
         }
       },
@@ -194,8 +194,8 @@
           "type": "item",
           "settings": {
             "icon": "map_pin",
-            "heading": "Local pickup",
-            "text": "Hamilton and Waterloo, free"
+            "heading": "Free local delivery",
+            "text": "Free in Waterloo, pickup too"
           }
         },
         "t4": {
