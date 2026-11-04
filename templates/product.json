@@ -37,12 +37,12 @@
           "type": "snag_fulfilment",
           "settings": {
             "title": "Pickup or delivery",
-            "pickup_1_label": "Hamilton",
-            "pickup_1_text": "<p><strong>Free.</strong> Ready within 24 hours. Pickup spot and times are confirmed by message after checkout.</p>",
-            "pickup_2_label": "Waterloo",
-            "pickup_2_text": "<p><strong>Free.</strong> Ready within 48 hours. Pickup spot and times are confirmed by message after checkout.</p>",
-            "delivery_label": "Delivery",
-            "delivery_text": "<p><strong>Flat $15</strong> across the GTHA and Waterloo Region, usually within 2 days. Choose Local delivery at checkout.</p>",
+            "pickup_1_label": "Pickup",
+            "pickup_1_text": "<p><strong>Free.</strong> Waterloo pickup, ready within 48 hours. Pickup spot and times are confirmed by message after checkout.</p>",
+            "pickup_2_label": "Local delivery",
+            "pickup_2_text": "<p><strong>Free in Waterloo.</strong> Usually within 2 days. Choose Local delivery at checkout and we message you with a window.</p>",
+            "delivery_label": "GTA delivery",
+            "delivery_text": "<p><strong>Flat $15</strong> across the Greater Toronto Area and the rest of Waterloo Region, usually within 2 days.</p>",
             "shipping_note": "Small items ship across Canada. Rates show at checkout."
           }
         },

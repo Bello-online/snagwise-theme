@@ -1,6 +1,6 @@
 # SnagWise theme
 
-Shopify theme for **SnagWise** (snagwise.myshopify.com): brand-new, sealed, name-brand products under retail, with free pickup in Hamilton and Waterloo and flat-fee delivery across the GTHA and Waterloo Region.
+Shopify theme for **SnagWise** (snagwise.myshopify.com): brand-new, sealed, name-brand products under retail, with free pickup and free local delivery in Waterloo, flat-fee delivery across the GTA and Waterloo Region.
 
 Fork of Shopify Dawn 16.0.0 with the shared conversion layer used across the Bello-online stores (`trust-bar`, `testimonials`, `comparison-table`, `stats-strip` sections, `sticky-atc` and `free-shipping-bar` snippets, `assets/cro.css`), plus the SnagWise layer described below.
 
@@ -34,7 +34,7 @@ Sections (all in `sections/snag-*.liquid`, styles in `assets/snag.css` and `asse
 Product page blocks in `sections/main-product.liquid` (rendered by `snippets/snag-product-blocks.liquid`):
 
 - **SnagWise deal line**: "You save $X", condition line, "Only N left · Limited quantity".
-- **SnagWise pickup & delivery**: Hamilton / Waterloo / Delivery picker that shows the fee and timing for each. Works without JavaScript (first option shown).
+- **SnagWise pickup & delivery**: Pickup / Local delivery / GTA delivery picker that shows the fee and timing for each. Works without JavaScript (first option shown).
 - **SnagWise ask button**: opens WhatsApp (with a prefilled message) or an Instagram DM. Set the number or handle in the block settings.
 
 Dawn's own product card (`snippets/card-product.liquid`, used on collection and search pages) gets the same savings and stock lines through `snippets/snag-card-meta.liquid`.
